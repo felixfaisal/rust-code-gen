@@ -21,6 +21,13 @@ impl Felix {
             _ => println!("Protocol does not exist"),
         }
     }
+    pub fn new(u: u32) -> Felix {
+        match u {
+            1 => Felix::ICMP,
+            3 => Felix::IGP,
+            _ => Felix::IGP,
+        }
+    }
 }
 fn main() {
     println!("Generating Rust code ===========>");
@@ -32,6 +39,9 @@ fn main() {
     proto = Felix::IGP;
     proto.String();
     proto.value();
+    let newproto = Felix::new(3);
+    newproto.String();
+    newproto.value();
 }
 
 fn generate_enum() {
