@@ -3,9 +3,21 @@ use std::io::prelude::*;
 use std::process::Command;
 
 fn main() {
+    enum Felix {
+        ICMP = 1,
+        IGP = 3,
+    };
     println!("Generating Rust code ===========>");
-    generate_enum();
-    run_shell();
+    // generate_enum();
+    // run_shell();
+    let proto = Felix::ICMP;
+    let mut curproto = 1;
+    let newproto = match curproto {
+        1 => Felix::ICMP,
+        3 => Felix::IGP,
+        _ => Felix::ICMP,
+    };
+    dbg!(newproto as i32);
 }
 
 fn generate_enum() {
