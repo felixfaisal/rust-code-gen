@@ -29,19 +29,30 @@ impl Felix {
         }
     }
 }
+#[derive(Debug, Clone, Copy)]
+struct union {
+    XXX_unionData: [u8; 4],
+}
+impl union {
+    pub fn new() -> union {
+        union {
+            XXX_unionData: [192, 168, 225, 0],
+        }
+    }
+    pub fn write(&mut self) {
+        for (pos, _e) in self.XXX_unionData.iter().enumerate() {
+            self.XXX_unionData[pos] = 0;
+        }
+    }
+}
+
 fn main() {
     println!("Generating Rust code ===========>");
     // generate_enum();
     // run_shell();
-    let mut proto = Felix::ICMP;
-    proto.String();
-    proto.value();
-    proto = Felix::IGP;
-    proto.String();
-    proto.value();
-    let newproto = Felix::new(3);
-    newproto.String();
-    newproto.value();
+    let mut uniondata = union::new();
+    dbg!(uniondata.XXX_unionData);
+    uniondata.write();
 }
 
 fn generate_enum() {
