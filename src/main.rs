@@ -2,22 +2,36 @@ use std::fs::File;
 use std::io::prelude::*;
 use std::process::Command;
 
+enum Felix {
+    ICMP = 1,
+    IGP = 3,
+}
+impl Felix {
+    pub fn String(&self) {
+        match self {
+            Felix::ICMP => println!("ICMP"),
+            Felix::IGP => println!("IGP"),
+            _ => println!("Protocol does not exist"),
+        }
+    }
+    pub fn value(&self) {
+        match self {
+            Felix::ICMP => println!("{}", Felix::ICMP as u32),
+            Felix::IGP => println!("{}", Felix::IGP as u32),
+            _ => println!("Protocol does not exist"),
+        }
+    }
+}
 fn main() {
-    enum Felix {
-        ICMP = 1,
-        IGP = 3,
-    };
     println!("Generating Rust code ===========>");
     // generate_enum();
     // run_shell();
-    let proto = Felix::ICMP;
-    let mut curproto = 1;
-    let newproto = match curproto {
-        1 => Felix::ICMP,
-        3 => Felix::IGP,
-        _ => Felix::ICMP,
-    };
-    dbg!(newproto as i32);
+    let mut proto = Felix::ICMP;
+    proto.String();
+    proto.value();
+    proto = Felix::IGP;
+    proto.String();
+    proto.value();
 }
 
 fn generate_enum() {
