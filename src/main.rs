@@ -31,12 +31,12 @@ impl Felix {
 }
 #[derive(Debug, Clone, Copy)]
 struct union {
-    XXX_unionData: [u8; 4],
+    XXX_unionData: [u8; 8],
 }
 impl union {
     pub fn new() -> union {
         union {
-            XXX_unionData: [192, 168, 225, 0],
+            XXX_unionData: [192, 168, 225, 0, 0, 0, 0, 0],
         }
     }
     pub fn write(&mut self) {
@@ -49,6 +49,21 @@ impl union {
             self.XXX_unionData[i] = 70;
         }
     }
+    pub fn GetIP4(&self) {
+        for i in 0..4 {
+            println!("{}", self.XXX_unionData[i]);
+        }
+    }
+    pub fn SetIP6(&mut self) {
+        for i in 0..self.XXX_unionData.len() {
+            self.XXX_unionData[i] = 0
+        }
+    }
+    pub fn GetIP6(&self) {
+        for i in 0..self.XXX_unionData.len() {
+            println!("{}", self.XXX_unionData[i]);
+        }
+    }
 }
 
 fn main() {
@@ -58,10 +73,13 @@ fn main() {
     let mut uniondata = union::new();
     dbg!(uniondata.XXX_unionData);
     uniondata.write();
-    uniondata.XXX_unionData[1] = 0;
-    uniondata.write();
-    uniondata.update();
-    uniondata.write();
+    // uniondata.XXX_unionData[1] = 0;
+    //uniondata.write();
+    // uniondata.update();
+    // uniondata.write();
+    uniondata.GetIP4();
+    uniondata.SetIP6();
+    uniondata.GetIP6();
 }
 
 fn generate_enum() {
