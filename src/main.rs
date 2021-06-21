@@ -40,8 +40,13 @@ impl union {
         }
     }
     pub fn write(&mut self) {
-        for (pos, _e) in self.XXX_unionData.iter().enumerate() {
-            self.XXX_unionData[pos] = 0;
+        for (pos, e) in self.XXX_unionData.iter().enumerate() {
+            println!("{} {}", pos, e);
+        }
+    }
+    pub fn update(&mut self) {
+        for i in 0..self.XXX_unionData.len() {
+            self.XXX_unionData[i] = 70;
         }
     }
 }
@@ -52,6 +57,10 @@ fn main() {
     // run_shell();
     let mut uniondata = union::new();
     dbg!(uniondata.XXX_unionData);
+    uniondata.write();
+    uniondata.XXX_unionData[1] = 0;
+    uniondata.write();
+    uniondata.update();
     uniondata.write();
 }
 
